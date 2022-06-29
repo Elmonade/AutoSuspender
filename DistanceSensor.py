@@ -40,10 +40,7 @@ def calculateTime():
 
     return (utime.ticks_diff(start, finish))
 
-def calculateDistance():
-    temp = dht.temperature()
-    humid =dht.humidity()
-
+def calculateDistance(temp):
     # SoundSpeed = 20.05 * (Tk)**0.5
     # Tk = 273.15 + Tc
     soundSpeed = 20.05 * (273.16 + temp) ** 0.5
