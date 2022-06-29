@@ -2,8 +2,6 @@
 
 **Batjigdrel Bataa / BB222MF**
 
-**Short project overview**
-
 With the help of ultrasonic distance sensor user's desktop will be suspended automatically whenever user leaves the specified range. To further
 increase the accuracy of the distance detection process additional sensors are integrated to the system.
 
@@ -28,28 +26,33 @@ Component | Part of | Bought at | Price*
 fipy                 |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 694 SEK**
 pysense              |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 317 SEK**
 Jumper wires         |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
+Bread board          |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
 HC-SR04 sensor       || amazon.se | 112 SEK
 Micro USB cable***   |||
 
 \* All prices are approximates.
+
 \** Components were part of a kit, thus they may be cheaper when bought individually.
+
 \*** USB cable was already in possession and free.
 
-![](https://i.imgur.com/ogLw9D3.jpg)
-Figure 1: Components used for the project
-
-All components are shown in Figure 1. From left to right:
-* LoPy 4.0: A microcontroller produced by Pycom which offers different connectivity options, such as WiFi, LoRa, Sigfox and Bluethooth. It is programmed in MicroPyhton and offers several digital and analog input and output pins.
-* Expansion Board V3: The expansion board is produced by pycom and makes it easier to connect a LoPy 4.0 microcontroller to peripherals such as sensors. Also, it offers an USB-port as well as a port for an external battery.
-* LoRa Antenna: This external antenna enables the usage of LoRa and Sigfox for the LoPy4.
-* DHT11 sensor: This sensor was used in the 3-pin version. It enables the digital measurement of temperature and relative humidity and is easily set up with help of a code library.
-* LDR: A LDR (=Light Dependent Resistor) is a electrical resistor which changes its resistance according to the light intensity. The higher the light intensity, the lower the electrical resistance.
-* Breadboard Full Size: Used for easy and solderless connection of sensors.
-* Jumper wires: Used to connect the Expansion Board V3 and the breadboard and to connect different lines on the breadboard.
-* Male/Female wires: Used to connect the breadboard and the LDRs.
-* 10 kOhm resistors: Electric resistors with a resistance of 10 kOhm which are used to create two voltage dividers.
-* USB-cable: Used to connect the Expansion board to a power supply and to a PC to upload code. Note that the usage of an USB cable which can transfer data is necessary for uploading code!
-
+![FiPy](./images/fipy.png)
+Figure 1: pycom fipy.
+The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to given remote server.
+![PySense](./images/pysense.png)
+Figure 2: pycom pysense.
+Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
+this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
+expose the pins.
+![JumperWires](./images/JumperWires.jpg)
+Figure 3: Male-to-Male jumper wires.
+Main connection method used in this project. It is a Male-to-Male type.
+![BreadBoard](./images/BreadBoard.jpg)
+Figure 4: Bread board.
+Serve as a base of connection. If further information required toturials are provided from the university.
+![DistanceSensor](./images/HC-SR04.jpg)
+Figure 5: HC-SR04 ultrasonic distance sensor.
+A sensor that uses ultrasonic sound wave to detect the distance.
 
 # Computer setup (Windows 10 OS)
 
