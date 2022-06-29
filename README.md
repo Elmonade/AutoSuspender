@@ -35,7 +35,7 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 \** Components were part of a kit, thus they may be cheaper when bought individually.
 
 ![FiPy](./images/fipy.png)
-<img style="display:block;margin:48px auto;padding:1px;border:1px #eee;width:100%;" src="./images/fipy.png" />
+<img style="display:block;margin:48px auto;padding:1px;border:1px #eee;width:50%;" src="./images/fipy.png" />
 
 Figure 1: pycom fipy.
 
@@ -58,7 +58,7 @@ Serve as a base of connection. If further information required toturials are pro
 Figure 5: HC-SR04 ultrasonic distance sensor. 
 
 A sensor that uses ultrasonic sound wave to detect the distance. It sends sound wave then catches the echo of it when it bounces back on 
-nearest object. 
+nearest object. Speed of sound will be used to complete the calculation. 
 
 
 # Computer setup
