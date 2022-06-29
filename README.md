@@ -19,7 +19,7 @@ their work without major delay.
 By working with this project, one can attain knowledge on intricate details of how certain sensors work, how machines percieve their surrounding.
 Further more, what can be done with the newly acquired data.
 
-# Materials needed
+# Materials used
 
 Component | Part of | Bought at | Price* 
 -| -| -| -
@@ -35,7 +35,7 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 \** Components were part of a kit, thus they may be cheaper when bought individually.
 
 ![FiPy](./images/fipy.png)
-<img style="display:block;margin:48px auto;padding:1px;border:1px #eee;width:50%;" src="./images/fipy.png" />
+<img style="display:block;margin:48px auto;padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
 
 Figure 1: pycom fipy.
 

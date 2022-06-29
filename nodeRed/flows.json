@@ -1,0 +1,498 @@
+[
+    {
+        "id": "72724770f50ad76c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dae4c48abf13d2c7",
+        "type": "ui_tab",
+        "name": "Lemon",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "586faa4121f1618a",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "dde3be659e5494ef",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "dae4c48abf13d2c7",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ece07be476d4a1a8",
+        "type": "mongodb",
+        "hostname": "127.0.0.1",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "Lemonade",
+        "name": ""
+    },
+    {
+        "id": "d5f3899fcc14d716",
+        "type": "udp in",
+        "z": "72724770f50ad76c",
+        "name": "Listen: 1880",
+        "iface": "",
+        "port": "1880",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [
+                "04557a2fa23e650a",
+                "5956e0965102aa0a",
+                "a48326a9365edfa6",
+                "20d7823036a1a547",
+                "3936b006a77a4983",
+                "1dd8d63515027e79"
+            ]
+        ]
+    },
+    {
+        "id": "5956e0965102aa0a",
+        "type": "function",
+        "z": "72724770f50ad76c",
+        "name": "Select Humidity",
+        "func": "sensorMeasurement=JSON.parse(msg.payload);\nmsg.payload=sensorMeasurement.Humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 500,
+        "wires": [
+            [
+                "f56be63ba19ddcd2"
+            ]
+        ]
+    },
+    {
+        "id": "04557a2fa23e650a",
+        "type": "debug",
+        "z": "72724770f50ad76c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f56be63ba19ddcd2",
+        "type": "ui_gauge",
+        "z": "72724770f50ad76c",
+        "name": "",
+        "group": "dde3be659e5494ef",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 900,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "93b1b4fb64891871",
+        "type": "mongodb out",
+        "z": "72724770f50ad76c",
+        "mongodb": "ece07be476d4a1a8",
+        "name": "Upload Environment",
+        "collection": "EnvironmentReadings",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 940,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5c476cad7653bbaf",
+        "type": "ui_gauge",
+        "z": "72724770f50ad76c",
+        "name": "",
+        "group": "dde3be659e5494ef",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Distance",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "80",
+        "className": "",
+        "x": 900,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "a48326a9365edfa6",
+        "type": "function",
+        "z": "72724770f50ad76c",
+        "name": "Select Distance",
+        "func": "\nsensorMeasurement=JSON.parse(msg.payload);\nmsg.payload=sensorMeasurement.Distance;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 660,
+        "wires": [
+            [
+                "5c476cad7653bbaf",
+                "efa3157de7ad3ce4"
+            ]
+        ]
+    },
+    {
+        "id": "20d7823036a1a547",
+        "type": "function",
+        "z": "72724770f50ad76c",
+        "name": "Select Temperature",
+        "func": "sensorMeasurement=JSON.parse(msg.payload);\nmsg.payload=sensorMeasurement.Temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 580,
+        "wires": [
+            [
+                "07ce5c0ae3b192cd"
+            ]
+        ]
+    },
+    {
+        "id": "07ce5c0ae3b192cd",
+        "type": "ui_gauge",
+        "z": "72724770f50ad76c",
+        "name": "",
+        "group": "dde3be659e5494ef",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 910,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3936b006a77a4983",
+        "type": "function",
+        "z": "72724770f50ad76c",
+        "name": "If Different",
+        "func": "\nsensorMeasurement=JSON.parse(msg.payload);\nhumid = sensorMeasurement.Humidity;\ntempe = sensorMeasurement.Temperature;\n\nif (humid != oldHumid || tempe != oldTempe){\n    oldHumid = humid;\n    oldTempe = tempe;\n    \n    let envData = {\"Humidity\": humid, \"Temperature\": tempe};\n    msg.payload = envData;\n\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\noldHumid = 0;\noldTempe = 0;\n",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 420,
+        "wires": [
+            [
+                "93b1b4fb64891871"
+            ]
+        ]
+    },
+    {
+        "id": "efa3157de7ad3ce4",
+        "type": "udp out",
+        "z": "72724770f50ad76c",
+        "name": "Send Response",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 920,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "a6bba5eda4b9d9f1",
+        "type": "debug",
+        "z": "72724770f50ad76c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "363cc54666001b22",
+        "type": "ui_chart",
+        "z": "72724770f50ad76c",
+        "name": "Read Data",
+        "group": "dde3be659e5494ef",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Desktop On Time",
+        "chartType": "bar",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "24",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d249b016e4d38c15",
+        "type": "mongodb out",
+        "z": "72724770f50ad76c",
+        "mongodb": "ece07be476d4a1a8",
+        "name": "ProximityRecord",
+        "collection": "DistanceValues",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 920,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "d5fa67bfbbbe7f0b",
+        "type": "mongodb in",
+        "z": "72724770f50ad76c",
+        "mongodb": "ece07be476d4a1a8",
+        "name": "Select Distance",
+        "collection": "DistanceValues",
+        "operation": "find",
+        "x": 780,
+        "y": 1200,
+        "wires": [
+            [
+                "363cc54666001b22"
+            ]
+        ]
+    },
+    {
+        "id": "e17fd10b2afa02ab",
+        "type": "exec",
+        "z": "72724770f50ad76c",
+        "command": "",
+        "addpay": "payload.CommandExecuted",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Suspend ",
+        "x": 900,
+        "y": 980,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1dd8d63515027e79",
+        "type": "function",
+        "z": "72724770f50ad76c",
+        "name": "Check Absence",
+        "func": "\nsensorMeasurement=JSON.parse(msg.payload);\nverify=sensorMeasurement.Verify;\ncommand=sensorMeasurement.Command;\n\nvar utc = new Date();\n\nif (verify == 5){\n    let executionInfo = {\"Date\": utc, \"CommandExecuted\": command};\n    msg.payload = executionInfo;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 820,
+        "wires": [
+            [
+                "d249b016e4d38c15",
+                "a6bba5eda4b9d9f1",
+                "e17fd10b2afa02ab"
+            ]
+        ]
+    }
+]
