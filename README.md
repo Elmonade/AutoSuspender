@@ -27,34 +27,41 @@ fipy                 |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | elect
 pysense              |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 317 SEK**
 Jumper wires         |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
 Bread board          |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
+Micro USB cable      |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
 HC-SR04 sensor       || amazon.se | 112 SEK
-Micro USB cable***   |||
 
 \* All prices are approximates.
 
 \** Components were part of a kit, thus they may be cheaper when bought individually.
 
-\*** USB cable was already in possession and free.
-
 ![FiPy](./images/fipy.png)
+<img style="display:block;margin:48px auto;padding:1px;border:1px #eee;width:100%;" src="./images/fipy.png" />
+
 Figure 1: pycom fipy.
+
 The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to given remote server.
 ![PySense](./images/pysense.png)
 Figure 2: pycom pysense.
+
 Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
 this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
 expose the pins.
 ![JumperWires](./images/JumperWires.jpg)
 Figure 3: Male-to-Male jumper wires.
+
 Main connection method used in this project. It is a Male-to-Male type.
 ![BreadBoard](./images/BreadBoard.jpg)
 Figure 4: Bread board.
+
 Serve as a base of connection. If further information required toturials are provided from the university.
 ![DistanceSensor](./images/HC-SR04.jpg)
-Figure 5: HC-SR04 ultrasonic distance sensor.
-A sensor that uses ultrasonic sound wave to detect the distance.
+Figure 5: HC-SR04 ultrasonic distance sensor. 
 
-# Computer setup (Windows 10 OS)
+A sensor that uses ultrasonic sound wave to detect the distance. It sends sound wave then catches the echo of it when it bounces back on 
+nearest object. 
+
+
+# Computer setup
 
 **Setting up the IDE:**
 
