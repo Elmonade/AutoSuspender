@@ -21,13 +21,13 @@ Further more, what can be done with the newly acquired data.
 
 # Materials needed
 
-Component | Part of | Bought at | Image | Price* 
+Component | Part of | Bought at | Price* 
 -| -| -| -
-fipy                 |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com |![FiPy](./images/fipy.png) | 694 SEK**
-pysense              |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com |![FiPy](./images/fipy.png) | 317 SEK**
-Jumper wires         |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com |![FiPy](./images/fipy.png) | 100 SEK**
-Bread board          |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com |![FiPy](./images/fipy.png) | 100 SEK**
-Micro USB cable      |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com |![FiPy](./images/fipy.png) | 100 SEK**
+fipy                 |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 694 SEK**
+pysense              |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 317 SEK**
+Jumper wires         |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
+Bread board          |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
+Micro USB cable      |LNU - 1DT305 Applied IoT - FiPy and sensors bundle | electrokit.com | 100 SEK**
 HC-SR04 sensor       || amazon.se | 112 SEK
 
 \* All prices are approximates.

@@ -27,8 +27,11 @@ if __name__=="__main__":
     cnt = 0
     absenceCnt = 0
     expectResponse = False
+    command = "systemctl suspend"
+
     humid = round(DistanceSensor.getHumidity())
     temp = round(DistanceSensor.getTemperature())
+
     while True:
         # Check humidity and temperature every 20 seconds.
         if cnt == 20:
@@ -40,19 +43,22 @@ if __name__=="__main__":
         distance = DistanceSensor.calculateDistance(temp)
         if (distance > 70):
             absenceCnt += 1
+        elif (distance <= 70 and absenceCnt != 0):
+            absenceCnt -= 1
         
         resultDict = {
-            "Humidity": str(humid),
+            "Humidity":    str(humid),
             "Temperature": str(temp),
-            "Distance": str(distance),
-            "Verify": str(absenceCnt)
+            "Distance":    str(distance),
+            "Verify":      str(absenceCnt),
+            "Command":     command
         }
         
         message = build_json(resultDict)
+        sendData(message, expectResponse)
         print(message)
 
-        sendData(message, expectResponse)
-        if (absenceCnt == 4):
+        if (absenceCnt == 5):
             absenceCnt = 0
 
         time.sleep(1)
