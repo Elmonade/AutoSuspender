@@ -2,7 +2,7 @@
 
 **Batjigdrel Bataa / BB222MF**
 
-With the help of ultrasonic distance sensor user's desktop will be suspended automatically whenever user leaves the specified range. To further
+With the help of ultrasonic distance sensor users desktop will be suspended automatically whenever user leaves the specified range. To further
 increase the accuracy of the distance detection process additional sensors are integrated to the system.
 
 **Amount of time required to replicate the project: ~1 hour**
@@ -42,6 +42,11 @@ Figure 1: pycom fipy.
 The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to given remote server.
 ![PySense](./images/pysense.png)
 Figure 2: pycom pysense.
+
+:::warning
+For this project, Expansion board with external DHT11/22 sensor might be more suitable. However in my case pysense is used due to time and budget
+limitations.
+:::
 
 Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
 this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
