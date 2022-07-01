@@ -176,7 +176,7 @@ Scaleability considred, since this system is meant for single user Node-Red shou
 
 # The code
 
-Calculating distance
+Calculating the distance
 ---
 Ultrasonic distance sensor works by sending high-frequency(40kHz) sound waves from the *Trigger* pin then catching the bounced echo on *Echo* pin.
 ```python
@@ -236,9 +236,13 @@ More important factor is ambient temperature, which makes noticeable difference.
 degree celsuis which results 343m/s speed of sound. In my current environment sound will travel 5m/s faster due to 8 degree warmer
 condition. With the temperature factor considered, distance will be calculated by dividing round trip distance by two. 
 
+The temperature used in the distance calculation is collected from the built-in sensor of pysense. The pycom provides necessary [files and a 
+instruction](https://docs.pycom.io/tutorials/expansionboards/sensing/) to use the sensors.
+
 P.S. Meter per Second is converted to Cintemeter per Nanosecond in calculation.
 
-Verifying presence of a user.
+
+Verifying the absence of a user.
 ---
 In order mitigate false reads and possible inconvienences caused by instant suspend, verification steps are added. 
 ```python
@@ -285,5 +289,73 @@ When connecting to the WiFi, name of the WiFi and the password should be replace
 
 # Transmitting the data / connectivity
 
+The microcontroller sends JSON containing all the sensor value every seconds. However, not every value inside are updated at the same rate. For 
+instance, humidity and temperature values are updated every 20 seconds. The distance and verification counter are updated at same rate as 
+the upload rate. At last, the command variable is constant and updated manually by user, if desires.
+```python
+resultDict = {
+    "Humidity":    str(humid),
+    "Temperature": str(temp),
+    "Distance":    str(distance),
+    "Verify":      str(absenceCnt),
+    "Command":     command
+}
+
+message = build_json(resultDict)
+```
+Package above is sent through WiFi using UDP protocol. Once the package is sent Node-Red recieves it through 'upd-in' block. On the block, port 
+to be used is specified.
+
+**Figure 10**: Editing 'udp-in' block.
+
+<img style="display:block;width:40%;" src="./images/udpInBlock.png" />
+
+Now on the microcontroller side, same port number is used along with IP address of the host machine running the Node-Red.
+```python
+def sendData(message, expectResponse):
+    addr = socket.getaddrinfo('192.168.43.202', 1880)[0][-1]
+    s.sendto(message, addr)
+    print('Message sent.')
+```
+
+The WiFi is most logical solution to the connection requirement of this project. Since, connection is made between the desktop and the 
+microcontroller in a same room. Long range was not the requirement. Neither power consumption due to how the system is basically connected to
+the wall plug, albeit through the desktop itself. Regardless of the situation, initially LoRa connectivity was tested. Unfortunately, 
+quality of the Helium coverage in the area was too weak to acknowledge the connection attempt. The Things Network had no coverage at all.
+
+Due to the advantages mentioned above, rate at data is sent is catered toward responsivenes of the system.
+
+Connection between the microcontroller and the desktop is solely one way connection, where data flows from microcontroller to desktop. Thus UDP 
+protocol serves the purposes without issue. Additionally, due to WiFi being used protocols with optimized package sizes, such as MQTT 
+is not necessary.
 
 # Presenting the data
+
+Data is preserved for indefinite amount of time. Since, data is stored locally. 
+New entry is added to the database in two situation. 
+
+    - Change in temperature or humidity: New temperature and humidity is uploaded.
+    
+    - Verified absence of a user: The command and date and time at which it got executed.
+
+MongoDB is used as a databse in this system. Main reason is well integration with Node-Red. A dedicated block is used to write new data to 
+MongoDB, where user only need to specify 
+1. Database name 
+2. Collection name
+3. Operation
+
+As name suggest, this system suspends the users desktop based on the absence of a user. This action is triggered by value called 'verify'. How 
+this value fluctuates depending on the different distances user appear from the desktop is explained on **The code** part.
+If the value hits 5, Node-Red executes following command sent from the microcontroller:
+```bash
+systemctl suspend
+```
+
+:grey_exclamation: Command above is only executeable on a Linux machine running init system *SystemD*. The command may vary depending on the 
+init system and/or operating system.
+
+**Figure 11**: Dashboard.
+
+<img style="display:block;width:100%;" src="./images/dashBoard.png" />
+
+# Finalizing the desing
