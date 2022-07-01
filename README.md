@@ -36,9 +36,12 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 
 
 ---
-**Figure 1**: pycom fipy. <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
+
+**Figure 1**: pycom fipy. 
+<img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
+
 The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to given remote server. Can 
-read data from both Digital and Analog sensors. Capable of following wireless communicaion mediums:
+read data from both Digital and Analog sensors. Capable of following wireless communicaion protocols:
 
     -Wifi 
     -LoRa
@@ -46,23 +49,31 @@ read data from both Digital and Analog sensors. Capable of following wireless co
     -SigFox 
     -Bluetooth
 
-**Figure 2**: pycom pysense. <img style="display:block; padding:1px;border:1px #eee;width:32%;" src="./images/PysenseII.png" />
+**Figure 2**: pycom pysense. 
+<img style="display:block; padding:1px;border:1px #eee;width:32%;" src="./images/PysenseII.png" />
+
 Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
 this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
 expose the pins.
 :grey_exclamation: For this project, Expansion board with external DHT11/22 sensor might be more suitable. However in my case pysense is 
 used due to time and budget limitations.
 
-**Figure 3**: Jumper wires. <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/JumperWires.png" />
+**Figure 3**: Jumper wires. 
+<img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/JumperWires.png" />
+
 Main connection method used in this project. It is a Male-to-Male type.
 
-**Figure 4**: Bread board. <img style="display:block; padding:1px;border:1px #eee;width:30%;" src="./images/BreadBoard.png" />
+**Figure 4**: Bread board. 
+<img style="display:block; padding:1px;border:1px #eee;width:30%;" src="./images/BreadBoard.png" />
+
 Serve as a base of connection. Board is divided into two halves. Each halve has horzintal internal connection. Meaning, under the hood 'a' pin 
 is connected to 'b' ping next to it, same goes for rest of the pin untill 'e'. The right half of the board follows same pattern, letter 'f'
 through 'j' is connected but not with the any pin above or below the row. Only exception is power rails denoted by the red and blue lines along
 the left and right edges. Unlike general pins in the middle, power pins are connected vertically, along coloured lines.
 
-**Figure 5**: HC-SR04 ultrasonic distance sensor. <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/HC-SR04.png" />
+**Figure 5**: HC-SR04 ultrasonic distance sensor. 
+<img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/HC-SR04.png" />
+
 A sensor that uses ultrasonic sound wave to detect the distance. It sends sound wave then catches the echo of it when it bounces back on 
 nearest object. Speed of sound will be used to complete the calculation. 
 
@@ -105,7 +116,9 @@ pacman -S python-pyserial
 
 # Putting everything together:
 
-**Figure 6**: Wiring. <img style="display:block;margin:1px auto;padding:1px;border:1px #eee;width:100%;" src="./images/WiringOfAutoSuspend.png" />
+**Figure 6**: Wiring. 
+<img style="display:block;margin:1px auto;padding:1px;border:1px #eee;width:100%;" src="./images/WiringOfAutoSuspend.png" />
+
 Connection between pysense and fipy follows exact connection of how it would have connected if we plug the two directly. Only difference is our 
 connection leave some of the fipys pins exposed. By doing so, we can attach the external HC-SR04 sensor. Which has 4 pins, Vcc, Trig, Echo, Gnd. Vcc pin
 is connected to 5v rail on the bottom which draws power from left most pin on the top of fipy; orientation follows the picture shown on figure 6.
@@ -126,17 +139,22 @@ is vast. Thus the platform is chosen without doubt.
 
 As I mentioned above, this platform is self hosted, meaning no additional fee is required than operational cost of the host machine.
 
-**Figure 7**: Node-Red input options. <img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED.png" />
+**Figure 7**: Node-Red input options. 
+<img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED.png" />
 Node-Red can recieve packets from the microcontroller through UDP, TCP, MQTT and few more options. In this project UDP protocol will be used due
 to ease of use. Furthermore, other options doesn't offer noticeable difference in our use case. The UDP message will contain JSON formated 
 message. 
 
-**Figure 8**: Node-Red 'function' block. <img style="display:block;width:40%;" src="./images/functionBlock.png" />
+**Figure 8**: Node-Red 'function' block. 
+<img style="display:block;width:40%;" src="./images/functionBlock.png" />
+
 With the message recieved at Node-Red, 'function' blocks can be used to filter the specific data from the message. After filtered, 
 message can be sent to chosen dashboard node to be illustrated. Furthermore, addendum to showing the data on the dashboard, filtered data can be 
 uploaded to connected MongoDB; Node-Red offers dedicated block for this. 
 
-**Figure 9**: Node-Red 'exec' block. <img style="display:block;width:40%;" src="./images/execBlock.png" />
+**Figure 9**: Node-Red 'exec' block. 
+<img style="display:block;width:40%;" src="./images/execBlock.png" />
+
 Finally, Node-Red can execute given system commands through its 'exec'
 block. Command to execute can be provided from either the message sent from the microcontroller or from the block itself.
 
@@ -147,6 +165,114 @@ Scaleability considred, since this system is meant for single user Node-Red shou
 
 # The code
 
+Calculating distance
+---
+Ultrasonic distance sensor works by sending high-frequency(40kHz) sound waves from the *Trigger* pin then catching the bounced echo on *Echo* pin.
+```python
+ECHO = Pin('P10', mode=Pin.IN) 
+TRIGGER = Pin('P9', mode=Pin.OUT)
+```
+In order to ouput a soundwave, mode of the pin connected to *Trigger* should be *OUT*. As for the *Echo* it should be *IN*.
+
+```python
+def calculateTime():
+    # TRIGGER pulse LOW for 2us (just in case)
+    TRIGGER(0)
+    utime.sleep_us(2)
+    # TRIGGER HIGH for a 10us pulse
+    TRIGGER(1)
+    utime.sleep_us(10)
+    TRIGGER(0)
+
+    # Wait for the rising edge of the ECHO then start timer
+    while ECHO() == 0:
+        pass
+    start = utime.ticks_us()
+
+    # Wait for end of ECHO pulse then stop timer
+    while ECHO() == 1:
+        pass
+    finish = utime.ticks_us()
+
+    # Pause for 20ms to prevent overlapping ECHOs
+    utime.sleep_ms(20)
+
+    return (utime.ticks_diff(start, finish))
+```
+In the *calculateTime* method, sound wave is emited for duration of 10 nano seconds. Afterwards, starting time of the emission noted on 
+*start* variable. Finally, when *Echo* pin recieves a sound wave, time it arrived is saved on *finish* variable. At the end of the method,
+it returns time difference between the two noted time. Which indicates round trip time of the sound wave.
+
+```python
+def calculateDistance(temp):
+    # SoundSpeed = 20.05 * (Tk)**0.5
+    # Tk = 273.15 + Tc
+    soundSpeed = 20.05 * (273.16 + temp) ** 0.5
+    print("Speed of sound in current environment: ", round(soundSpeed))
+
+    # Distance to an object = ((speed of sound in the air)*time)/2
+    time = calculateTime()
+    soundSpeed /= -10000
+    distance = (time * soundSpeed)/2
+    print("Distance from the monitor to user: ", round(distance), "cm.")
+    return round(distance)
+```
+The *calculateDistance* method uses speed of sound and the time from previous method to calculate distance between the sensor and any object in
+front of it. During the calculation temperature is used to improve the accuracy. The speed of sound is affected by several factors. Including,
+Humidity and Air pressure, however the degree which those two affect are minimal to the point where it can be ignored safely for this project.
+More important factor is ambient temperature, which makes noticeable difference. In most calculations ambient temperature is assumed to be 20 
+degree celsuis which results 343m/s speed of sound. In my current environment sound will travel 5m/s faster due to 8 degree warmer
+condition. With the temperature factor considered, distance will be calculated by dividing round trip distance by two. 
+
+P.S. Meter per Second is converted to Cintemeter per Nanosecond in calculation.
+
+Verifying presence of a user.
+---
+
+```python
+absenceCnt = 0
+```
+
+```python
+# Update distance every second.
+distance = DistanceSensor.calculateDistance(temp)
+if (distance > 70):
+    absenceCnt += 1
+elif (distance <= 70 and absenceCnt != 0):
+    absenceCnt -= 1
+```
+
+```python
+if (absenceCnt == 5):
+    absenceCnt = 0
+```
+
+Network connection
+---
+
+```python
+def do_connect():
+    from network import WLAN
+    import time
+    import pycom
+    import machine
+    pycom.wifi_mode_on_boot(WLAN.STA)   # choose station mode on boot
+    wlan = WLAN() # get current object, without changing the mode
+    # Set STA on soft rest
+    if machine.reset_cause() != machine.SOFT_RESET:
+        wlan.init(mode=WLAN.STA)        # Put modem on Station mode
+    if not wlan.isconnected():          # Check if already connected
+        print("Connecting to WiFi...")
+        # Connect with your WiFi Credential
+        wlan.connect('WorldsFastestWiFi', auth=(WLAN.WPA2, '42069'))
+        # Check if it is connected otherwise wait
+        while not wlan.isconnected():
+            pass
+    print("Connected to Wifi")
+    time.sleep_ms(500)
+    # Print the IP assigned by router
+    print('network config:', wlan.ifconfig(id=0))
+```
 
 # Transmitting the data / connectivity
 

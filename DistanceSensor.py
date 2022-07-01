@@ -25,17 +25,17 @@ def calculateTime():
     utime.sleep_us(10)
     TRIGGER(0)
 
-    # wait for the rising edge of the ECHO then start timer
+    # Wait for the rising edge of the ECHO then start timer
     while ECHO() == 0:
         pass
     start = utime.ticks_us()
 
-    # wait for end of ECHO pulse then stop timer
+    # Wait for end of ECHO pulse then stop timer
     while ECHO() == 1:
         pass
     finish = utime.ticks_us()
 
-    # pause for 20ms to prevent overlapping ECHOs
+    # Pause for 20ms to prevent overlapping ECHOs
     utime.sleep_ms(20)
 
     return (utime.ticks_diff(start, finish))
