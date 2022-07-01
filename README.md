@@ -58,7 +58,7 @@ Additional board which gives access to SD card reader, battery connection, and 5
 this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
 expose the pins.
 
-:grey_exclamation: For this project, Expansion board with external DHT11/22 sensor might be more suitable. However in my case pysense is 
+:speech_balloon: For this project, Expansion board with external DHT11/22 sensor might be more suitable. However in my case pysense is 
 used due to time and budget limitations.
 
 **Figure 3**: Jumper wires. 
@@ -119,6 +119,22 @@ pacman -S dialog
 pacman -S python-pyserial
 ```
 
+---
+
+Following programs will be used in later parts of the project.
+
+4. Installing Node-RED
+```
+npm install -g --unsafe-perm node-red
+```
+5. Installing MongoDB
+```
+yay -S mongodb
+yay -S mongodb-compass
+```
+
+:exclamation: Commands mentioned  in this section might require root privilege. Please use tools like doas, sudo, etc to assume the identity of root user. 
+Otherwise, login as a root, which is bad practice but it is your machine in the end. 
 
 # Putting everything together:
 
@@ -337,6 +353,20 @@ New entry is added to the database in two situation.
     - Change in temperature or humidity: New temperature and humidity is uploaded.
     
     - Verified absence of a user: The command and date and time at which it got executed.
+
+First condition is achieved through 'function' block in Node-Red. Previous state of each humidity and temperature is saved inside a variable. 
+Whenever knew data arrive, it is compared to the old data and only if at least one of them is different, data is uploaded to the database.
+```javascript
+if (humid != oldHumid || tempe != oldTempe){
+    oldHumid = humid;
+    oldTempe = tempe;
+    
+    let envData = {"Humidity": humid, "Temperature": tempe};
+    msg.payload = envData;
+
+    return msg;
+}
+```
 
 MongoDB is used as a databse in this system. Main reason is well integration with Node-Red. A dedicated block is used to write new data to 
 MongoDB, where user only need to specify 
