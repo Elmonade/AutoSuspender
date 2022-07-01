@@ -148,7 +148,7 @@ As I mentioned above, this platform is self hosted, meaning no additional fee is
 
 **Figure 7**: Node-Red input options. 
 
-<img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED.png" />
+<img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED-Input.png" />
 
 Node-Red can recieve packets from the microcontroller through UDP, TCP, MQTT and few more options. In this project UDP protocol will be used due
 to ease of use. Furthermore, other options doesn't offer noticeable difference in our use case. The UDP message will contain JSON formated 
@@ -172,7 +172,7 @@ block. Command to execute can be provided from either the message sent from the 
 Cloud based platform features are limited to what the vendor provides thus Node-Red should offer more options. On the downside it may lack when 
 it comes to visual aesthetics. However, as that is not the main concern of this project it won't affect the choice. 
 
-Scaleability considred, since this system is meant for single user Node-Red should be able to handle the demand with ease. 
+Scaleability considred, since this system is meant for single user, Node-Red running on local machine should be able to handle the demand with ease. 
 
 # The code
 
@@ -359,3 +359,37 @@ init system and/or operating system.
 <img style="display:block;width:100%;" src="./images/dashBoard.png" />
 
 # Finalizing the desing
+
+As a whole project, goal is achieved. However given additional time there is plenty more stuff to try out, improve upon.
+
+First, implementing this system on a generic ESP32 board. Due to limitations and work around methods imposed by pysense board, project ended up costing 
+more than it should and wasted several sensors that never used on the project. Additionally, more wiring is required. If the project was 
+developed on ESP32 board with dedicated sensors, process would be more streamlined and cost effective. Another way could be using 'Expansion Board'
+from pycom.
+
+Secondly, investing some time into custom PCB board and working on the conneciton between sensor and the microcontroller to make it more robust.
+Possibly 3D printing shell to protect it and mount it.
+
+**Figure 12**: Node-RED whole setup.
+
+<img style="display:block;width:100%;" src="./images/Node-RED.png" />
+
+**Figure 13**: MongoDB structure.
+
+<img style="display:block;width:30%;" src="./images/MongoDBsetup.png" />
+
+**Figure 14**: MongoDB EnvironmentReadings collection entries.
+
+<img style="display:block;width:40%;" src="./images/MongoDBenvi.png" />
+
+**Figure 15**: MongoDB DistanceValues collection entries.
+
+<img style="display:block;width:40%;" src="./images/MongoDBdis.png" />
+
+**Figure 16**: Top down view.
+
+<img style="display:block;width:100%;" src="./images/TopDownView.jpg" />
+
+**Figure 17**: Front view.
+
+<img style="display:block;width:100%;" src="./images/FrontView.jpg" />
