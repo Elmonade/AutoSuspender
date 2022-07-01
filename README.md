@@ -57,6 +57,7 @@ read data from both Digital and Analog sensors. Capable of following wireless co
 Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
 this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
 expose the pins.
+
 :grey_exclamation: For this project, Expansion board with external DHT11/22 sensor might be more suitable. However in my case pysense is 
 used due to time and budget limitations.
 
@@ -182,7 +183,8 @@ Ultrasonic distance sensor works by sending high-frequency(40kHz) sound waves fr
 ECHO = Pin('P10', mode=Pin.IN) 
 TRIGGER = Pin('P9', mode=Pin.OUT)
 ```
-In order to ouput a soundwave, mode of the pin connected to *Trigger* should be *OUT*. As for the *Echo* it should be *IN*.
+In order to ouput a soundwave, mode of the pin connected to *Trigger* should be *OUT*. As for the *Echo* it should be *IN*.  According to the 
+connection diagram on *Figure 6*, pins mentioned above will be *P10* and *P9*.
 
 ```python
 def calculateTime():
@@ -238,10 +240,11 @@ P.S. Meter per Second is converted to Cintemeter per Nanosecond in calculation.
 
 Verifying presence of a user.
 ---
-
+In order mitigate false reads and possible inconvienences caused by instant suspend, verification steps are added. 
 ```python
 absenceCnt = 0
 ```
+First, dedicated counter variable is declared with value zero inside main method above the infinite loop.
 
 ```python
 # Update distance every second.
@@ -251,38 +254,34 @@ if (distance > 70):
 elif (distance <= 70 and absenceCnt != 0):
     absenceCnt -= 1
 ```
+Previously declared variable is increased every time sensor doesn't detect any object inside 70cm perimeter in front of the sensor inside 15
+degree window. If sensor continue to not detect any object for the next 4 successive read system consider user left the desktop and proceeds
+to next action. However, during this successive reads, if sensors returns below 70 value, *absenceCnt* variable is decreased by one. Making 
+the verification level lower and if this continues, system will return to initial state.
 
 ```python
 if (absenceCnt == 5):
     absenceCnt = 0
 ```
+If system succesfully verify user is left, counter is resetted. By the time counter resets, Node-Red should be executing suspend command.
+
+```javascript
+if (verify == 5){
+    let executionInfo = {"Date": utc, "CommandExecuted": command};
+    msg.payload = executionInfo;
+    return msg;
+}
+```
+Code snippet above is from the Node-Red block, written in JavaScript. The *absenceCnt* variable is sent to Node-Red and double checked there
+before continueing.
 
 Network connection
 ---
 
 ```python
-def do_connect():
-    from network import WLAN
-    import time
-    import pycom
-    import machine
-    pycom.wifi_mode_on_boot(WLAN.STA)   # choose station mode on boot
-    wlan = WLAN() # get current object, without changing the mode
-    # Set STA on soft rest
-    if machine.reset_cause() != machine.SOFT_RESET:
-        wlan.init(mode=WLAN.STA)        # Put modem on Station mode
-    if not wlan.isconnected():          # Check if already connected
-        print("Connecting to WiFi...")
-        # Connect with your WiFi Credential
-        wlan.connect('WorldsFastestWiFi', auth=(WLAN.WPA2, '42069'))
-        # Check if it is connected otherwise wait
-        while not wlan.isconnected():
-            pass
-    print("Connected to Wifi")
-    time.sleep_ms(500)
-    # Print the IP assigned by router
-    print('network config:', wlan.ifconfig(id=0))
+wlan.connect('WorldsFastestWiFi', auth=(WLAN.WPA2, '42069'))
 ```
+When connecting to the WiFi, name of the WiFi and the password should be replaced on the line above, inside *boot.py* file.
 
 # Transmitting the data / connectivity
 
