@@ -38,6 +38,7 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 ---
 
 **Figure 1**: pycom fipy. 
+
 <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
 
 The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to given remote server. Can 
@@ -50,6 +51,7 @@ read data from both Digital and Analog sensors. Capable of following wireless co
     -Bluetooth
 
 **Figure 2**: pycom pysense. 
+
 <img style="display:block; padding:1px;border:1px #eee;width:32%;" src="./images/PysenseII.png" />
 
 Additional board which gives access to SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
@@ -59,11 +61,13 @@ expose the pins.
 used due to time and budget limitations.
 
 **Figure 3**: Jumper wires. 
+
 <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/JumperWires.png" />
 
 Main connection method used in this project. It is a Male-to-Male type.
 
 **Figure 4**: Bread board. 
+
 <img style="display:block; padding:1px;border:1px #eee;width:30%;" src="./images/BreadBoard.png" />
 
 Serve as a base of connection. Board is divided into two halves. Each halve has horzintal internal connection. Meaning, under the hood 'a' pin 
@@ -72,6 +76,7 @@ through 'j' is connected but not with the any pin above or below the row. Only e
 the left and right edges. Unlike general pins in the middle, power pins are connected vertically, along coloured lines.
 
 **Figure 5**: HC-SR04 ultrasonic distance sensor. 
+
 <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/HC-SR04.png" />
 
 A sensor that uses ultrasonic sound wave to detect the distance. It sends sound wave then catches the echo of it when it bounces back on 
@@ -117,6 +122,7 @@ pacman -S python-pyserial
 # Putting everything together:
 
 **Figure 6**: Wiring. 
+
 <img style="display:block;margin:1px auto;padding:1px;border:1px #eee;width:100%;" src="./images/WiringOfAutoSuspend.png" />
 
 Connection between pysense and fipy follows exact connection of how it would have connected if we plug the two directly. Only difference is our 
@@ -140,12 +146,15 @@ is vast. Thus the platform is chosen without doubt.
 As I mentioned above, this platform is self hosted, meaning no additional fee is required than operational cost of the host machine.
 
 **Figure 7**: Node-Red input options. 
+
 <img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED.png" />
+
 Node-Red can recieve packets from the microcontroller through UDP, TCP, MQTT and few more options. In this project UDP protocol will be used due
 to ease of use. Furthermore, other options doesn't offer noticeable difference in our use case. The UDP message will contain JSON formated 
 message. 
 
 **Figure 8**: Node-Red 'function' block. 
+
 <img style="display:block;width:40%;" src="./images/functionBlock.png" />
 
 With the message recieved at Node-Red, 'function' blocks can be used to filter the specific data from the message. After filtered, 
@@ -153,6 +162,7 @@ message can be sent to chosen dashboard node to be illustrated. Furthermore, add
 uploaded to connected MongoDB; Node-Red offers dedicated block for this. 
 
 **Figure 9**: Node-Red 'exec' block. 
+
 <img style="display:block;width:40%;" src="./images/execBlock.png" />
 
 Finally, Node-Red can execute given system commands through its 'exec'
