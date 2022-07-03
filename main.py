@@ -6,9 +6,12 @@ import ujson
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 def sendData(message, expectResponse):
-    addr = socket.getaddrinfo('192.168.43.202', 1880)[0][-1]
-    s.sendto(message, addr)
-    print('Message sent.')
+    try:    
+        addr = socket.getaddrinfo('192.168.43.202', 1880)[0][-1]
+        s.sendto(message, addr)
+        print('Message sent.')
+    except:
+        print('Message not sent.')
 
     if(expectResponse):
         response = s.recv(1024)
