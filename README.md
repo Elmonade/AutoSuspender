@@ -11,9 +11,18 @@ With the help of an ultrasonic distance sensor, the user's desktop will be suspe
 Due to a severe lack of time management and self-control, my desktop hardly shuts down. Often it hits a couple of days of uptime. This is not environment-friendly behavior and it puts a major strain on the desktop computer itself. To mitigate the issue however little it may, I chose this project.
 
 Average desktop computers consume several hundred watts. High-end computers could consume upwards of over 1kwatts. To minimize the power
-consumption, suspending the computer is the safest and easiest solution due to harmless behavior towards users workflow by letting the user resume their work without major delay. 
+consumption, and prolong the longevity of the system, suspending the computer is the safest and easiest solution due to harmless behavior towards users workflow by letting the user resume their work without major delay. 
+
+Most if not all operating systems support auto sleep based on in-activity from the user. However, it can take considerable amount of time to kick in and suspend the computer, roughly around 15 minutes depending on the length set by the vendor by default or the user. In case user 
+shortens the sleep timer it can lead to inconvienent behaviours from the system. For instance, suspending when the user reading or watching 
+content since user is not actively engaging with the computer. Regardless of whether user is there in front of the computer or not.
+
+Such behaviour can be optimized and system can sleep whenever possible without causing issues to the user, *hopefuly*.
 
 By working with this project, one can attain knowledge of intricate details of how certain sensors work, and how machines perceive their surrounding. Furthermore, what can be done with the newly acquired data?
+
+:speech_bubble: Linux saves the current state of the system into the RAM and cuts the power supply of all devices except the RAM. Most other 
+operating system should behave in a similar manner.
 
 # Materials used
 
