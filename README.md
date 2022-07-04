@@ -34,7 +34,7 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 
 **Figure 1**: pycom fipy. 
 
-<img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
+<img style="display:block; padding:1px;border:1px #eee;width:22%;" src="./images/fipy.png" />
 
 The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to a given remote server. Can read data from both Digital and Analog sensors. Capable of following wireless communication protocols:
 
