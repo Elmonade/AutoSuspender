@@ -2,8 +2,7 @@
 
 **Batjigdrel Bataa / BB222MF**
 
-With the help of an ultrasonic distance sensor, the user's desktop will be suspended automatically whenever the user leaves the specified range. To further
-increase the accuracy of the distance detection process additional sensors are integrated into the system.
+With the help of an ultrasonic distance sensor, the user's desktop will be suspended automatically whenever the user leaves the specified range. To further increase the accuracy of the distance detection process additional sensors are integrated into the system.
 
 **Amount of time required to replicate the project: ~1 hour**
 
@@ -12,11 +11,9 @@ increase the accuracy of the distance detection process additional sensors are i
 Due to a severe lack of time management and self-control, my desktop hardly shuts down. Often it hits a couple of days of uptime. This is not environment-friendly behavior and it puts a major strain on the desktop computer itself. To mitigate the issue however little it may, I chose this project.
 
 Average desktop computers consume several hundred watts. High-end computers could consume upwards of over 1kwatts. To minimize the power
-consumption, suspending the computer is the safest and easiest solution due to harmless behavior towards users workflow by letting the user resume 
-their work without major delay. 
+consumption, suspending the computer is the safest and easiest solution due to harmless behavior towards users workflow by letting the user resume their work without major delay. 
 
-By working with this project, one can attain knowledge of intricate details of how certain sensors work, and how machines perceive their surrounding.
-Furthermore, what can be done with the newly acquired data?
+By working with this project, one can attain knowledge of intricate details of how certain sensors work, and how machines perceive their surrounding. Furthermore, what can be done with the newly acquired data?
 
 # Materials used
 
@@ -33,15 +30,13 @@ HC-SR04 sensor       || amazon.se | 112 SEK
 
 \** Components were part of a kit, thus they may be cheaper when bought individually.
 
-
 ---
 
 **Figure 1**: pycom fipy. 
 
 <img style="display:block; padding:1px;border:1px #eee;width:20%;" src="./images/fipy.png" />
 
-The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to a given remote server. Can 
-read data from both Digital and Analog sensors. Capable of following wireless communication protocols:
+The microcontroller used in this project. Responsible for reading data from connected sensors and sending the data to a given remote server. Can read data from both Digital and Analog sensors. Capable of following wireless communication protocols:
 
     -Wifi 
     -LoRa
@@ -51,11 +46,9 @@ read data from both Digital and Analog sensors. Capable of following wireless co
 
 **Figure 2**: pycom pysense. 
 
-<img style="display:block; padding:1px;border:1px #eee;width:32%;" src="./images/PysenseII.png" />
+<img style="display:block; padding:1px;border:1px #eee;width:25%;" src="./images/PysenseII.png" />
 
-An additional board that gives access to an SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However,
-this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to
-expose the pins.
+An additional board that gives access to an SD card reader, battery connection, and 5 more built-in sensors for the connected microcontroller. However, this board covers up all the pins on the microcontroller blocking the further connection to different sensors. Additional wiring is required to expose the pins.
 
 :speech_balloon: For this project, an expansion board with an external DHT11/22 sensor might be more suitable. However, in my case pysense is 
 used due to time and budget limitations.
@@ -70,10 +63,7 @@ Main connection method used in this project. It is a Male-to-Male type.
 
 <img style="display:block; padding:1px;border:1px #eee;width:30%;" src="./images/BreadBoard.png" />
 
-Serve as a base of connection. Board is divided into two halves. Each halve has horzintal internal connection. Meaning, that under the hood 'a' pin 
-is connected to 'b' ping next to it, the same goes for the rest of the pin until 'e'. The right half of the board follows the same pattern, letter 'f'
-through 'j' is connected but not with any pin above or below the row. The only exception is power rails denoted by the red and blue lines along
-the left and right edges. Unlike general pins in the middle, power pins are connected vertically, along colored lines.
+Serve as a base of connection. Board is divided into two halves. Each halve has horzintal internal connection. Meaning, that under the hood 'a' pin is connected to 'b' ping next to it, the same goes for the rest of the pin until 'e'. The right half of the board follows the same pattern, letter 'f' through 'j' is connected but not with any pin above or below the row. The only exception is power rails denoted by the red and blue lines along the left and right edges. Unlike general pins in the middle, power pins are connected vertically, along colored lines.
 
 **Figure 5**: HC-SR04 ultrasonic distance sensor. 
 
@@ -85,33 +75,24 @@ the nearest object. Speed of sound will be used to complete the calculation.
 
 # Computer setup 
 
-With the components at hand, the next thing to prepare is how the software side of things is handled. First, the text editor of choice, I have used the 
-Visual Studio Code, a well-known mainstream IDE. However, the plugin for interfacing with the microcontroller behaves oddly in certain scenarios on 
-my machine when using Visual Studio Code. Thus, uploading and interacting with the microcontroller will be handled by Atom IDE. Specifically 
-PyMakr plugin on Atom IDE. If you are comfortable with using Atom, I suggest solely using Atom since you won't have to juggle between programs. 
-On the other hand, if you have a preferred text editor, you can use that to write the code and use Atoms PyMakr plugin to only run and upload
-the code to the microcontroller.
+With the components at hand, the next thing to prepare is how the software side of things is handled. First, the text editor of choice, I have used the Visual Studio Code, a well-known mainstream IDE. However, the plugin for interfacing with the microcontroller behaves oddly in certain scenarios on my machine when using Visual Studio Code. Thus, uploading and interacting with the microcontroller will be handled by Atom IDE. Specifically PyMakr plugin on Atom IDE. If you are comfortable with using Atom, I suggest solely using Atom since you won't have to juggle between programs.  On the other hand, if you have a preferred text editor, you can use that to write the code and use Atoms PyMakr plugin to only run and upload the code to the microcontroller.
 
-## Steps - Can be followed on Arch Linux
+## Steps - Can be followed on certain Linux distros.
 
 1. Installing Atom
 ```
 yay -S atom
 ```
 
-The package manager should take care of all the dependencies. In case the installation process yields a conflict error concerning Node.js, try removing
-any existing version of Node.js from your system. The reason is Atom uses an older version of Node.js as of writing this.
+The package manager should take care of all the dependencies. In case the installation process yields a conflict error concerning Node.js, try removing any existing version of Node.js from your system. The reason is Atom uses an older version of Node.js as of writing this.
 
 2. Installing PyMakr
 
-After installing Atom, a plugin called PyMakr is required to connect to the microcontroller. The installation process is illustrated in the following
-[link](https://docs.pycom.io/gettingstarted/software/atom/).
+After installing Atom, a plugin called PyMakr is required to connect to the microcontroller. The installation process is illustrated in the following [link](https://docs.pycom.io/gettingstarted/software/atom/).
 
 3. Updating firmware
 
-Finally, it is recommended to update the firmware of your microcontroller. With pycom devices, the official program is provided by the vendor, which 
-can be downloaded from the following [link](https://software.pycom.io/downloads/linux-1.16.5.html). When doing so on Linux additional packages are 
-required.
+Finally, it is recommended to update the firmware of your microcontroller. With pycom devices, the official program is provided by the vendor, which can be downloaded from the following [link](https://software.pycom.io/downloads/linux-1.16.5.html). When doing so on Linux additional packages are required.
 
 ```
 pacman -S dialog
@@ -132,8 +113,7 @@ yay -S mongodb
 yay -S mongodb-compass
 ```
 
-:exclamation: Commands mentioned in this section might require root privilege. Please use tools like doas, sudo, etc to assume the identity of the root user. 
-Otherwise, login as a root, which is bad practice but it is your machine in the end. 
+:exclamation: Commands mentioned in this section might require root privilege. Please use tools like doas, sudo, etc to assume the identity of the root user. Otherwise, login as a root, which is bad practice but it is your machine in the end. 
 
 # Putting everything together:
 
@@ -141,23 +121,14 @@ Otherwise, login as a root, which is bad practice but it is your machine in the 
 
 <img style="display:block;margin:1px auto;padding:1px;border:1px #eee;width:100%;" src="./images/WiringOfAutoSuspend.png" />
 
-The connection between pysense and fipy follows the exact connection of how it would have connected if we plug the two directly. The only difference is our 
-connection leaves some of the fipys pins exposed. By doing so, we can attach the external HC-SR04 sensor. Which has 4 pins, Vcc, Trig, Echo, Gnd. Vcc pin
-is connected to a 5v rail on the bottom which draws power from the left-most pin on the top of the fipy; orientation follows the picture shown in figure 6.
-The external sensor is grounded on the top most rail of the breadboard which is connected to the second pin from the top left of fipy, next to the 5v pin.
-Afterward, the Trig pin is connected to the bottom of the fourth pin from the right. Finally, the Echo ping is connected right next to the Trig pin.
+The connection between pysense and fipy follows the exact connection of how it would have connected if we plug the two directly. The only difference is our connection leaves some of the fipys pins exposed. By doing so, we can attach the external HC-SR04 sensor. Which has 4 pins, Vcc, Trig, Echo, Gnd. Vcc pin is connected to a 5v rail on the bottom which draws power from the left-most pin on the top of the fipy; orientation follows the picture shown in figure 6.  The external sensor is grounded on the top most rail of the breadboard which is connected to the second pin from the top left of fipy, next to the 5v pin.  Afterward, the Trig pin is connected to the bottom of the fourth pin from the right. Finally, the Echo ping is connected right next to the Trig pin.
 
-As our system will be used indoors next to the desktop, power will be provided from the desktop itself. Meaning, that the power consumption of the system should
-not be an issue. If the microcontroller is connected to a USB 3.0 port it can deliver up to 900mA current. According to the official 
-documentation, fipy consumes 137mA when in WiFi client mode. Additionally, the HC-SR04 sensor consumes 15mA when actively working. The total
-current consumption of the system sums up to ~152mA which puts it roughly around the Low-power device category of USB 3.0 power standards. Finally, since 
-USB 3.0/2.0 is 5v, total power consumption of the system will be 0.76 watts.
+As our system will be used indoors next to the desktop, power will be provided from the desktop itself. Meaning, that the power consumption of the system should not be an issue. If the microcontroller is connected to a USB 3.0 port it can deliver up to 900mA current. According to the official documentation, fipy consumes 137mA when in WiFi client mode. Additionally, the HC-SR04 sensor consumes 15mA when actively working. The total current consumption of the system sums up to ~152mA which puts it roughly around the Low-power device category of USB 3.0 power standards. Finally, since USB 3.0/2.0 is 5v, total power consumption of the system will be 0.76 watts.
 
 # Platform
 
 Auto Suspender uses Node-Red for managing the data received from the microcontroller by filtering, transmitting, and executing. The platform is 
-chosen due to how many possibilities it offers. Since it is self-hosted and offers drag-n-drop style coding blocks, the functionality user can achieve
-is vast. Thus the platform is chosen without a doubt. 
+chosen due to how many possibilities it offers. Since it is self-hosted and offers drag-n-drop style coding blocks, the functionality user can achieve is vast. Thus the platform is chosen without a doubt. 
 
 As I mentioned above, this platform is self-hosted, meaning no additional fee is required other than the operational cost of the host machine.
 
@@ -165,33 +136,26 @@ As I mentioned above, this platform is self-hosted, meaning no additional fee is
 
 <img style="display:block;padding:1px;border:1px #eee;width:80%;" src="./images/Node-RED-Input.png" />
 
-Node-Red can receive packets from the microcontroller through UDP, TCP, MQTT, and a few more options. In this project, the UDP protocol will be used due
-to its ease of use. Furthermore, other options don't offer a noticeable difference in our use case. The UDP message will contain JSON formatted 
-message. 
+Node-Red can receive packets from the microcontroller through UDP, TCP, MQTT, and a few more options. In this project, the UDP protocol will be used due to its ease of use. Furthermore, other options don't offer a noticeable difference in our use case. The UDP message will contain JSON formatted message. 
 
 **Figure 8**: Node-Red 'function' block. 
 
 <img style="display:block;width:40%;" src="./images/functionBlock.png" />
 
 With the message received at Node-Red, 'function' blocks can be used to filter the specific data from the message. After filtered, 
-the message can be sent to chosen dashboard node to be illustrated. Furthermore, as an addendum to showing the data on the dashboard, filtered data can be 
-uploaded to connected MongoDB; Node-Red offers a dedicated block for this. 
+the message can be sent to chosen dashboard node to be illustrated. Furthermore, as an addendum to showing the data on the dashboard, filtered data can be uploaded to connected MongoDB; Node-Red offers a dedicated block for this. 
 
 **Figure 9**: Node-Red 'exec' block. 
 
 <img style="display:block;width:40%;" src="./images/execBlock.png" />
 
-Finally, Node-Red can execute given system commands through its 'exec'
-block. Command to execute can be provided from either the message sent from the microcontroller or from the block itself.
+Finally, Node-Red can execute given system commands through its 'exec' block. Command to execute can be provided from either the message sent from the microcontroller or from the block itself.
 
-Cloud-based platform features are limited to what the vendor provides thus Node-Red should offer more options. On the downside, it may lack when 
-it comes to visual aesthetics. However, as that is not the main concern of this project it won't affect the choice. 
+Cloud-based platform features are limited to what the vendor provides thus Node-Red should offer more options. On the downside, it may lack when it comes to visual aesthetics. However, as that is not the main concern of this project it won't affect the choice. 
 
 Scaleability considered, since this system is meant for a single user, Node-Red running on a local machine should be able to handle the demand with ease. 
 
-:speech_balloon:Assuming Node-Red installed and running. One can import the whole flow used in this project from *nodeRed* folder. Node-Red offers multiple 
-ways to save and transfer the project. This instance, JSON format is used. After accessing the local server, this JSON can be imported
-easily with 'import' button inside hamburger menu on the top right corner.
+:speech_balloon: Assuming Node-Red installed and running. One can import the whole flow used in this project from *nodeRed* folder. Node-Red offers multiple ways to save and transfer the project. This instance, JSON format is used. After accessing the local server, this JSON can be imported easily with 'import' button inside hamburger menu on the top right corner.
 
 # The code
 
