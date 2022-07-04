@@ -386,3 +386,7 @@ Possibly 3D printing shell to protect it and mount it.
 **Figure 16**: Setup overview.
 
 <img style="display:block;width:100%;" src="./images/setup.png" />
+
+---
+
+:speech_balloon: Summarized overview and functionality shown in the following [video](https://youtu.be/iFuNeoWhiHY).
