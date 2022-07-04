@@ -419,10 +419,6 @@ Possibly 3D printing shell to protect it and mount it.
 
 <img style="display:block;width:40%;" src="./images/MongoDBdis.png" />
 
-**Figure 16**: Top-down view.
+**Figure 16**: Setup overview.
 
-<img style="display:block;width:100%;" src="./images/TopDownView.jpg" />
-
-**Figure 17**: Front view.
-
-<img style="display:block;width:100%;" src="./images/FrontView.jpg" />
+<img style="display:block;width:100%;" src="./images/setup.png" />
