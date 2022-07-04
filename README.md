@@ -21,7 +21,7 @@ Such behaviour can be optimized and system can sleep whenever possible without c
 
 By working with this project, one can attain knowledge of intricate details of how certain sensors work, and how machines perceive their surrounding. Furthermore, what can be done with the newly acquired data?
 
-:speech_bubble: Linux saves the current state of the system into the RAM and cuts the power supply of all devices except the RAM. Most other 
+:speech_balloon: Linux saves the current state of the system into the RAM and cuts the power supply of all devices except the RAM. Most other 
 operating system should behave in a similar manner.
 
 # Materials used
