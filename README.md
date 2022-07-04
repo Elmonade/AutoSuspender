@@ -189,6 +189,10 @@ it comes to visual aesthetics. However, as that is not the main concern of this 
 
 Scaleability considered, since this system is meant for a single user, Node-Red running on a local machine should be able to handle the demand with ease. 
 
+:speech_balloon:Assuming Node-Red installed and running. One can import the whole flow used in this project from *nodeRed* folder. Node-Red offers multiple 
+ways to save and transfer the project. This instance, JSON format is used. After accessing the local server, this JSON can be imported
+easily with 'import' button inside hamburger menu on the top right corner.
+
 # The code
 
 Calculating the distance
