@@ -342,8 +342,7 @@ if (humid != oldHumid || tempe != oldTempe){
 }
 ```
 
-MongoDB is used as a database in this system. The main reason is well integrated with Node-Red. A dedicated block is used to write new data to 
-MongoDB, where users only need to specify 
+MongoDB is used as a database in this system. The main reason is a well integration with Node-Red. A dedicated block is used to write new data to MongoDB, where users only need to specify 
 1. Database name 
 2. Collection name
 3. Operation
