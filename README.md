@@ -13,9 +13,7 @@ Due to a severe lack of time management and self-control, my desktop hardly shut
 Average desktop computers consume several hundred watts. High-end computers could consume upwards of over 1kwatts. To minimize the power
 consumption, and prolong the longevity of the system, suspending the computer is the safest and easiest solution due to harmless behavior towards users workflow by letting the user resume their work without major delay. 
 
-Most if not all operating systems support auto sleep based on in-activity from the user. However, it can take considerable amount of time to kick in and suspend the computer, roughly around 15 minutes depending on the length set by the vendor by default or the user. In case user 
-shortens the sleep timer it can lead to inconvienent behaviours from the system. For instance, suspending when the user reading or watching 
-content since user is not actively engaging with the computer. Regardless of whether user is there in front of the computer or not.
+Most, if not all operating systems support auto sleep based on in-activity from the user. If we assume user left shortly after last interaction, it can take considerable amount of time to kick in and suspend the computer. Depending on the length set by the vendor by default, or the user, usually 15 minute or up. In case user shortens the sleep timer, it can lead to inconvienent behaviours from the system. For instance, suspending when the user was reading or watching content since user is not actively engaging with the computer. Regardless of whether user is there in front of the computer or not.
 
 Such behaviour can be optimized and system can sleep whenever possible without causing issues to the user, *hopefuly*.
 
