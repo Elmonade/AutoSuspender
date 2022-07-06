@@ -365,13 +365,11 @@ init system and/or operating system.
 
 As a whole project, the goal is achieved. However given additional time there is plenty more stuff to try out, and improve upon.
 
-First, implement this system on a generic ESP32 board. Due to limitations and work-around methods imposed by the pysense board, the project ended up costing 
-more than it should and wasted several sensors that were never used on the project. Additionally, more wiring is required. If the project was 
-developed on an ESP32 board with dedicated sensors, the process would be more streamlined and cost-effective. Another way could be using the 'Expansion Board'
-from pycom.
+First, implement this system on a generic ESP32 board. Due to limitations and work-around methods imposed by the pysense board, the project ended up costing more than it should and wasted several sensors that were never used on the project. Additionally, more wiring is required. If the project was developed on an ESP32 board with dedicated sensors, the process would be more streamlined and cost-effective. Another way could be using the 'Expansion Board' from pycom.
 
-Secondly, investing some time into a custom PCB board and working on the connection between the sensor and the microcontroller to make it more robust.
-Possibly 3D printing shell to protect it and mount it.
+Secondly, investing some time into a custom PCB board and working on the connection between the sensor and the microcontroller to make it more robust. Possibly 3D printing shell to protect it and mount it.
+
+Lastly, implementing more robust error handling in case microcontroler throws error. 
 
 **Figure 12**: Node-RED whole setup.
 
